@@ -23,6 +23,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(255))
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
+    pitches = db.relationship("Pitch", backref="users")
 
     @property
     def password(self):
@@ -67,13 +68,13 @@ class Category:
 
 
 
-class Comment():
+class Comment:
     """
     Class for defining Comment instances
     """
     pass
 
-class Pitch():
+class Pitch(db.Model):
     """
     Class for defining Post instances
     """
@@ -82,8 +83,11 @@ class Pitch():
     pitch = db.Column(db.String, index = True)
     likes = db.Column(db.Integer)
     dislikes = db.Column(db.Integer)
-    user_id
-    user_name
-    profile_pic_path
-    time_posted
-    category
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    time_posted = db.Column(db.DateTime())
+    category = db.Column(db.String())
+
+    def get_username(self):
+        return User.query.filter_by(id = self.user_id).first().user_name
+    def get_profile_pic(self):
+        return User.query.filter_by(id = self.user_id).first().profile_pic_path
