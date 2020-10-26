@@ -1,0 +1,20 @@
+body,
+html {
+    background-color: F3F1F4;
+}
+
+#navbar {
+    background: #b553cd;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    height: 100px;
+    position: sticky;
+    top: 0;
+    margin-bottom: 50px;
+}
+
+.post {
+    padding: 30px 25px;
+    background: #ffffff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}

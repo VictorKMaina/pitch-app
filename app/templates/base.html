@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="/static/app-resources/styles.css">
+            {{ bootstrap.load_css() }}
+        {% endblock %}
+
+        <title></title>
+        {% endblock %}
+    </head>
+    <body>
+        <!-- Your page content -->
+        
+
+        {% block navbar %}
+        <nav id="navbar" class="navbar navbar-expand-sm navbar-light">
+            <div class="container p-0">
+                <a class="navbar-brand" href="/">
+                    <img src="/static/app-resources/Logo.svg" alt="logo">
+                </a>
+                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">
+                                <img src="/static/app-resources/account_icon.svg" alt="">
+                                <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% endblock %}
+
+        {% block content %}
+        {% endblock %}
+
+        {% block scripts %}
+            <!-- Optional JavaScript -->
+            {{ bootstrap.load_js() }}
+        {% endblock %}
+    </body>
+</html>
