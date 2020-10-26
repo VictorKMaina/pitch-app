@@ -1,20 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;800&family=Open+Sans&display=swap');
+
 body,
 html {
     background-color: F3F1F4;
+    font-size: 10px;
 }
 
 #navbar {
     background: #b553cd;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    height: 100px;
+    /* height: 100px; */
     position: sticky;
     top: 0;
     margin-bottom: 50px;
 }
 
-.post {
-    padding: 30px 25px;
+.post, .side-bar {
     background: #ffffff;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+}
+
+.post {
+    padding: 30px 25px;
+}
+.side-bar {
+}
+
+img {
+    width: 80%;
+}
+.side-bar .title {
+    width: 100%;
+    text-align: center;
+    background: #40BF63;
+    padding-top: 23px;
+    padding-bottom: 23px;
+    margin-bottom: 35px;
+    border-radius: 10px 10px 0px 0px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 2.3rem;
+    font-weight: 800;
+}
+.post-header {
+    font-family: Montserrat, sans-serif;
+}
+
+.side-bar .category-item {
+    padding-bottom: 35px;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-weight: 500;
+    font-size: 1.8rem;
+}
+.profile-pic {
+    border-radius: 100%;
+    background: #C4C4C4;
+    width: 50px;
+    height: 50px;
+}
+.post-username {
+    font-size: 2rem;
+    font-weight: 600;
+}
+.post-category {
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #BDBDBD;
+}
+.post-time {
+    color: #858585;
+}
+.post-content {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.8rem;
+}
+.post-content a, .post-content a:hover {
+    color: #1A63BC;
+    text-transform: none;
 }
