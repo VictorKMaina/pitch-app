@@ -1,38 +1,13 @@
 {% extends 'base.html' %}
-{% import "/macros.html" as macro %}
+{% import "macros.html" as macro %}
 
 {% block content %}
 <div class="container p-0">
     <div class="row">
-        <div class="col-sm-8">
-            <div class="post">
-                <div class="post-header d-flex justify-content-between">
-                    <div class="d-flex">
-                        <div class="profile-pic align-self-center"></div>
-                        <div class="ml-4 align-self-center">
-                            <p class="post-username m-0">victormainak</p>
-                            <p class="post-category m-0">Interview</p>
-                        </div>
-                    </div>
-                    <div class="post-time align-self-center">
-                        10:03 AM Oct 24, 2020
-                    </div>
-                </div>
-                <hr class="w-100 my-5">
-                <div class="post-content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non erat in risus egestas pulvinar non sed dolor. Sed eu enim est. In efficitur sem at urna posuere tristique. Vivamus fringilla sed nisi in blandit. Vestibulum convallis arcu non nisi ornare, a porttitor erat molestie. Cras viverra mattis metus quis lobortis. Mauris lobortis quam non molestie rhoncus. Suspendisse fermentum nibh a purus euismod porttitor...<a href="#">Read More</a>
-                </div>
-                <hr class="w-100 my-5">
-                <div class="post-engagement">
-                    <div class="post-likes">
-                        {{ macro.likeButton() }}
-                        <span class="ml-2">Likes</span>
-                    </div>
-                    <div class="post-dislikes"></div>
-                </div>
-            </div>
+        <div class="col-md-8">
+            {{ macro.feedPost() }}
         </div>
-        <div class="col-sm-4">
+        <div class="col-md-4">
             <div class="side-bar">
                 <div class="h4 title text-white">Categories</div>
                 <div class="category-item">Sales</div>
