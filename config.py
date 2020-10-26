@@ -26,13 +26,13 @@ class TestConfig(Config):
     """
     Class for Test configurations. Child of Config class.
     """
-    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://victormainak:user@localhost/pitch_test"
+    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://victormainak:password@localhost/pitch_test"
 
 class DevConfig(Config):
     """
     Class for Development configurations. Child of Config class.
     """
-    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://victormainak:user@localhost/pitch"
+    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://victormainak:password@localhost/pitch"
     DEBUG = True
 
 config_options = {
