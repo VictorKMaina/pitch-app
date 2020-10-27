@@ -1,54 +1,72 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        {% block head %}
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        {% block styles %}
-            <!-- Bootstrap CSS -->
-            {{ bootstrap.load_css() }}
-            
-            <link rel="stylesheet" href="/static/app-resources/styles.css">
-        {% endblock %}
+<head>
+    {% block head %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title></title>
-        {% endblock %}
-    </head>
-    <body>
-        <!-- Your page content -->
-        
+    {% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
 
-        {% block navbar %}
-        <nav id="navbar" class="navbar navbar-expand-sm navbar-light">
-            <div class="container p-0">
-                <a class="navbar-brand" href="/">
-                    <img src="/static/app-resources/Logo.svg" alt="logo">
-                </a>
-                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="collapsibleNavId">
-                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">
+    <link rel="stylesheet" href="/static/app-resources/styles.css">
+    {% endblock %}
+
+    <title></title>
+    {% endblock %}
+</head>
+
+<body>
+    <!-- Your page content -->
+
+
+    {% block navbar %}
+    <nav id="navbar" class="navbar navbar-expand-sm navbar-light">
+        <div class="container p-0">
+            <a class="navbar-brand" href="/">
+                <img src="/static/app-resources/Logo.svg" alt="logo">
+            </a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item active">
+                        <div class="d-flex">
+                            <a class="nav-link" href="/">
                                 <img src="/static/app-resources/account_icon.svg" alt="">
-                                <span class="sr-only">(current)</span></a>
-                        </li>
-                    </ul>
-                </div>
+                                <span class="sr-only">{{current_user.user_name}}</span>
+                            </a>
+                            <p class="nav-link"><a href="{{url_for('auth.sign_out')}}">Sign Out</a></p>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{{url_for('auth.sign_up')}}">Create Account</a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('auth.sign_in')}}">Sign In</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
             </div>
-        </nav>
-        {% endblock %}
+        </div>
+    </nav>
+    {% endblock %}
 
-        {% block content %}
-        {% endblock %}
+    {% block content %}
+    {% endblock %}
 
-        {% block scripts %}
-            <!-- Optional JavaScript -->
-            {{ bootstrap.load_js() }}
-        {% endblock %}
-    </body>
+    {% block scripts %}
+    <!-- Optional JavaScript -->
+    {{ bootstrap.load_js() }}
+    {% endblock %}
+</body>
+
 </html>
