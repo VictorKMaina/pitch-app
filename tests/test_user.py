@@ -21,7 +21,7 @@ class UserClassTest(unittest.TestCase):
         """
         Run after each test case
         """
-        # User.query.filter_by(id = self.user.id).delete()
+        User.query.filter_by(id = self.user.id).delete()
 
     def test_user_instance(self):
         """

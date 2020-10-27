@@ -1,0 +1,4 @@
+Hello, {{user.username}}
+Welcome to Pitcher!
+
+Thanks for signing up. We are looking forward to the amazing ideas you have to share.
