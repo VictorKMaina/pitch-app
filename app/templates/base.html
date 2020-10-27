@@ -42,15 +42,15 @@
                                 <img src="/static/app-resources/account_icon.svg" alt="">
                                 <span class="sr-only">{{current_user.user_name}}</span>
                             </a>
-                            <p class="nav-link"><a href="{{url_for('auth.sign_out')}}">Sign Out</a></p>
+                            <p class="nav-link"><a href="{{url_for('auth.logout')}}">Sign Out</a></p>
                         </div>
                     </li>
                     {% else %}
                     <li>
-                        <a href="{{url_for('auth.sign_up')}}">Create Account</a>
+                        <a href="{{url_for('auth.sign_in')}}">Create Account</a>
                     </li>
                     <li>
-                        <a href="{{url_for('auth.sign_in')}}">Sign In</a>
+                        <a href="{{url_for('auth.login')}}">Log In</a>
                     </li>
                     {% endif %}
 

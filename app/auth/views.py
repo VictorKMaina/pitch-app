@@ -19,7 +19,7 @@ def login():
         flash("Invalid username or Password")
     
     title = "Pitcher Login"
-    return render_template("auth/sign_in.html", signin_form = signup_form, title = title)
+    return render_template("auth/login.html", signin_form = signup_form, title = title)
 
 @auth.route("/sign-out")
 @login_required
@@ -27,7 +27,7 @@ def logout():
     logout_user()
     return redirect(url_for("main.index"))
 
-@auth.route("/sign-up", methods = ["GET", "POST"])
+@auth.route("/sign-in", methods = ["GET", "POST"])
 def sign_in():
     form = SignupForm()
 
@@ -42,5 +42,5 @@ def sign_in():
 
         title = "New Account"
 
-    return render_template("auth/sign_up.html", signup_form = form)
+    return render_template("auth/sign_in.html", signup_form = form)
 
