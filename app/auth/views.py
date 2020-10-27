@@ -8,7 +8,7 @@ from ..email import mail_message
 
 
 @auth.route("/sign-in", methods=["GET", "POST"])
-def sign_in():
+def login():
     signup_form = SigninForm()
     if signup_form.validate_on_submit():
         user = User.query.filter_by(email=signup_form.email.data).first()
