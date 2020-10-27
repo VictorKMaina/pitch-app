@@ -14,7 +14,7 @@ def index():
     """
     View function that returns root page
     """
-    pitches = Pitch.query.all()
+    pitches = reversed(Pitch.query.all())
     form = NewPitchForm()
 
     if form.validate_on_submit():
@@ -25,5 +25,6 @@ def index():
         new_pitch = Pitch(pitch = pitch, likes = 0, dislikes = 0, time_posted = time, category = category)
 
         new_pitch.save()
+        return redirect(url_for('main.index'))
 
     return render_template("index.html", new_pitch_form = form, pitches = pitches)
