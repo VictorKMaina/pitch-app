@@ -7,7 +7,7 @@ from .. import db
 from ..email import mail_message
 
 
-@auth.route("/sign-in", methods=["GET", "POST"])
+@auth.route("/login", methods=["GET", "POST"])
 def login():
     signup_form = SigninForm()
     if signup_form.validate_on_submit():
@@ -23,12 +23,12 @@ def login():
 
 @auth.route("/sign-out")
 @login_required
-def sign_out():
+def logout():
     logout_user()
     return redirect(url_for("main.index"))
 
 @auth.route("/sign-up", methods = ["GET", "POST"])
-def sign_up():
+def sign_in():
     form = SignupForm()
 
     if form.validate_on_submit():
