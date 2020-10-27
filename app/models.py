@@ -117,10 +117,17 @@ class Pitch(db.Model):
         Method to query database for profile pic path of pitch owner
         """
         return User.query.filter_by(id = self.user_id).first().profile_pic_path
-        
+
     def save(self):
         """
         Method for commiting new pitch to database
         """
         db.session.add(self)
         db.session.commit()
+    
+    def add_likes(self):
+        """
+        Method to add one like to pitch
+        """
+        self.likes += 1
+        self.save()

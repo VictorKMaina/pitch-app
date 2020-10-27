@@ -17,7 +17,7 @@ class TestPitchClass(unittest.TestCase):
 
         self.user.save()
 
-        self.pitch = Pitch(pitch = "Are you the wind? Because you're blowing me away.", likes = 34, dislikes = 43, user_id = self.user.id, time_posted = "2020-11-17 03:30", category = Category.pickup_lines)
+        self.pitch = Pitch(pitch = "Are you the wind? Because you're blowing me away.", likes = 0, dislikes = 0, user_id = self.user.id, time_posted = "2020-11-17 03:30", category = Category.pickup_lines)
 
 
     def tearDown(self):
@@ -36,8 +36,8 @@ class TestPitchClass(unittest.TestCase):
 
         self.assertIsNotNone(self.pitch.id)
         self.assertEqual(self.pitch.pitch,"Are you the wind? Because you're blowing me away.")
-        self.assertEqual(self.pitch.likes, 34)
-        self.assertEqual(self.pitch.dislikes, 43)
+        self.assertEqual(self.pitch.likes, 0)
+        self.assertEqual(self.pitch.dislikes, 0)
         self.assertEqual(self.pitch.time_posted, datetime.datetime(2020, 11, 17, 3, 30))
 
     def test_save(self):
@@ -68,9 +68,19 @@ class TestPitchClass(unittest.TestCase):
         """
         Test case to see if get_profile_pic method returns profile pic of user associated with pitch
         """
+        self.pitch.save()
+
+        profile_pic_path = self.pitch.get_profile_pic()
+
+        self.assertEqual(User.query.filter_by(id = self.user.id).first().profile_pic_path, profile_pic_path)
+    
 
     
     def test_add_likes(self):
         """
         Test case to check if method adds like to database
         """
+        self.pitch.save()
+        self.pitch.add_likes()
+
+        self.assertEqual(self.pitch.likes, 1)
