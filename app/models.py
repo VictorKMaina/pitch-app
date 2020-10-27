@@ -23,7 +23,9 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(255))
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
-    pitches = db.relationship("Pitch", backref="users")
+
+    pitches = db.relationship("Pitch", backref="user")
+    comments = db.relationship("Comment", backref="user")
 
     @property
     def password(self):
@@ -53,7 +55,7 @@ class User(db.Model, UserMixin):
         db.session.commit()
 
     def __repr__(self):
-        return f"User {self.username}"
+        return f"User {self.user_name}"
 
 class Category:
     """
@@ -68,11 +70,24 @@ class Category:
 
 
 
-class Comment:
+class Comment(db.Model):
     """
     Class for defining Comment instances
     """
-    pass
+    __tablename__ = "comments"
+    id = db.Column(db.Integer, primary_key = True)
+    comment = db.Column(db.String, index = True)
+    likes = db.Column(db.Integer)
+    dislikes = db.Column(db.Integer)
+    time_posted = db.Column(db.DateTime())
+    category = db.Column(db.String())
+    pitch_id = db.Column(db.Integer, db.ForeignKey("pitches.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+
+    def get_username(self):
+        return User.query.filter_by(id = self.user_id).first().user_name
+    def get_profile_pic(self):
+        return User.query.filter_by(id = self.user_id).first().profile_pic_path
 
 class Pitch(db.Model):
     """
@@ -86,6 +101,8 @@ class Pitch(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     time_posted = db.Column(db.DateTime())
     category = db.Column(db.String())
+    comments = db.relationship("Comment", backref="pitch")
+
 
     def get_username(self):
         return User.query.filter_by(id = self.user_id).first().user_name

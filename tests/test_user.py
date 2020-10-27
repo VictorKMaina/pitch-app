@@ -1,6 +1,8 @@
 from app.models import User
 from app import db
 import unittest
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 class UserClassTest(unittest.TestCase):
     """
@@ -13,35 +15,47 @@ class UserClassTest(unittest.TestCase):
         """
         Runs before each test case
         """
-        self.new_user = User(user_name="victormainak", email="contact@victormaina.com", password = "password", first_name="Victor", last_name="Maina", bio="Student at Moringa", profile_pic_path="/static/app-resources/pp.jpg")
+        self.user = User(user_name = "victormainak", email = "vk13runic@gmail.com", password = "test", first_name = "Victor", last_name = "Maina", bio = "Student at Moringa", profile_pic_path = "/static/app-resources/pp.jpg")
 
     def tearDown(self):
         """
         Run after each test case
         """
-        User.query.delete()
-    
+        # User.query.filter_by(id = self.user.id).delete()
+
     def test_user_instance(self):
         """
-        Check if User instance is created correctly
+        Test case to check if User is instance is created
         """
-        self.assertEquals(self.new_user.user_name, "victormainak")
-        self.assertEquals(self.new_user.first_name, "Victor")
-        self.assertEquals(self.new_user.last_name, "Maina")
-        self.assertEquals(self.new_user.bio, "Student at Moringa")
-        self.assertEquals(self.new_user.profile_pic_path, "/static/app-resources/pp.jpg")
-    def test_save(self):
-        """
-        Test case to check if save method commits user to database
-        """
-        self.new_user.save()
+        # db.create_all()
+        db.session.add(self.user)
+        db.session.commit()
 
-        check_user = User.query.filter_by(id = self.new_user.id).first()
-        self.assertEquals(self.new_user, check_user)
+        self.assertIsNotNone(self.user.id)
+        self.assertEqual(self.user.user_name, "victormainak")
+        self.assertEqual(self.user.email, "vk13runic@gmail.com")
+        self.assertTrue(check_password_hash(self.user.pass_secure, "test"))
+        self.assertEqual(self.user.first_name, "Victor")
+        self.assertEqual(self.user.last_name, "Maina")
+        self.assertEqual(self.user.bio, "Student at Moringa")
+        self.assertEqual(self.user.profile_pic_path, "/static/app-resources/pp.jpg")
 
     def test_verify_password(self):
         """
-        Test case to see if password is verified
+        Test case to if password is verified
         """
-        self.assertTrue(self.new_user.verify_password("password"))
-        self.assertFalse(self.new_user.verify_password("wrong password"))
+        self.assertTrue(self.user.verify_password("test"))
+
+    def test_save(self):
+        """
+        Test case to check if save method posts to database
+        """
+        test_user = User(user_name = "victormainak", email = "vk13runic@gmail.com", password = "test", first_name = "Victor", last_name = "Maina", bio = "Student at Moringa", profile_pic_path = "/static/app-resources/pp.jpg")
+
+        # db.create_all()
+        test_user.save()
+
+        username = User.query.filter_by(id = test_user.id).first()
+        print(username.user_name)
+
+        self.assertEqual(username.user_name, "victormainak")
