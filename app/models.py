@@ -61,12 +61,14 @@ class Category:
     """
     Class for defining categories
     """
-    sales = "sales"
-    engagement = "engagement"
-    product = "product"
-    pickup_lines = "pickup_lines"
-    interview = "interview"
-    other = "other"
+    sales = "Sales"
+    engagement = "Engagement"
+    product = "Product"
+    promotion = "Promotion"
+    pickup_lines = "Pickup_lines"
+    interview = "Interview"
+    project = "Project"
+    other = "Other"
 
 
 
@@ -108,3 +110,9 @@ class Pitch(db.Model):
         return User.query.filter_by(id = self.user_id).first().user_name
     def get_profile_pic(self):
         return User.query.filter_by(id = self.user_id).first().profile_pic_path
+    def save(self):
+        """
+        Method for commiting new pitch to database
+        """
+        db.session.add(self)
+        db.session.commit()

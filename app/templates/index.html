@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 {% import "macros.html" as macro %}
+{% import "bootstrap/form.html" as form %}
 
 {% block content %}
 <div class="container p-0">
     <div class="row">
         <div class="col-md-8">
-            {{ macro.feedPost() }}
+            <div class="post" id="post_new_pitch">
+                {{ form.render_form(new_pitch_form) }}
+            </div>
+            {{ macro.feedPost(pitches) }}
         </div>
         <div class="col-md-4">
             <div class="side-bar">
