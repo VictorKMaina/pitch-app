@@ -15,13 +15,16 @@ class UserClassTest(unittest.TestCase):
         """
         Runs before each test case
         """
+        db.create_all()
+
         self.user = User(user_name = "victormainak", email = "vk13runic@gmail.com", password = "test", first_name = "Victor", last_name = "Maina", bio = "Student at Moringa", profile_pic_path = "/static/app-resources/pp.jpg")
 
     def tearDown(self):
         """
         Run after each test case
         """
-        User.query.filter_by(id = self.user.id).delete()
+        db.session.commit()
+        db.drop_all()
 
     def test_user_instance(self):
         """
@@ -56,6 +59,5 @@ class UserClassTest(unittest.TestCase):
         test_user.save()
 
         username = User.query.filter_by(id = test_user.id).first()
-        print(username.user_name)
 
         self.assertEqual(username.user_name, "victormainak")

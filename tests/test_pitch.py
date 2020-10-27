@@ -11,14 +11,21 @@ class TestPitchClass(unittest.TestCase):
         """
         Runs before each test case
         """
-        self.pitch = Pitch(pitch = "Are you the wind? Because you're blowing me away.", likes = 34, dislikes = 43, time_posted = "2020-11-17 03:30", category = Category.pickup_lines)
+        db.create_all()
+
+        self.user = User(user_name = "testing", email = "vk13runic@gmail.com", password = "test", first_name = "Victor", last_name = "Maina", bio = "Student at Moringa", profile_pic_path = "/static/app-resources/pp.jpg")
+
+        self.user.save()
+
+        self.pitch = Pitch(pitch = "Are you the wind? Because you're blowing me away.", likes = 34, dislikes = 43, user_id = self.user.id, time_posted = "2020-11-17 03:30", category = Category.pickup_lines)
 
 
     def tearDown(self):
         """
         Runs after each test case
         """
-        # User.query.filter_by(id = self.user_id).delete()
+        db.session.commit()
+        db.drop_all()
 
     def test_pitch_instance(self):
         """
@@ -32,3 +39,38 @@ class TestPitchClass(unittest.TestCase):
         self.assertEqual(self.pitch.likes, 34)
         self.assertEqual(self.pitch.dislikes, 43)
         self.assertEqual(self.pitch.time_posted, datetime.datetime(2020, 11, 17, 3, 30))
+
+    def test_save(self):
+        """
+        Test if save method commits new pitch to database
+        """
+        test_pitch = Pitch(pitch = "Are you the wind? Because you're blowing me away.", likes = 34, dislikes = 43, user_id = 1, time_posted = "2020-11-17 03:30", category = Category.pickup_lines)
+
+        # db.create_all()
+        test_pitch.save()
+
+        pitch = Pitch.query.filter_by(id = test_pitch.id).first()
+
+        self.assertEqual(pitch.pitch, "Are you the wind? Because you're blowing me away.")
+        self.assertIsNotNone(pitch.user_id)
+
+    def test_get_username(self):
+        """
+        Test case to see if get_username method returns username associated with pitch
+        """
+        self.pitch.save()
+
+        username = self.pitch.get_username()
+
+        self.assertEqual(User.query.filter_by(id = self.user.id).first().user_name, username)
+    
+    def test_get_profile_pic(self):
+        """
+        Test case to see if get_profile_pic method returns profile pic of user associated with pitch
+        """
+
+    
+    def test_add_likes(self):
+        """
+        Test case to check if method adds like to database
+        """

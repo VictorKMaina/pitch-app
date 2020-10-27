@@ -107,9 +107,17 @@ class Pitch(db.Model):
 
 
     def get_username(self):
+        """
+        Method to query database for username of pitch owner
+        """
         return User.query.filter_by(id = self.user_id).first().user_name
+
     def get_profile_pic(self):
+        """
+        Method to query database for profile pic path of pitch owner
+        """
         return User.query.filter_by(id = self.user_id).first().profile_pic_path
+        
     def save(self):
         """
         Method for commiting new pitch to database
