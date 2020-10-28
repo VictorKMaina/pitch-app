@@ -125,9 +125,16 @@ class Pitch(db.Model):
         db.session.add(self)
         db.session.commit()
     
-    def add_likes(self):
+    # def add_likes(self):
+    #     """
+    #     Method to add one like to pitch
+    #     """
+    #     self.likes += 1
+    #     self.save()
+
+    def add_dislikes(self):
         """
-        Method to add one like to pitch
+        Method to add one dislike to pitch
         """
         self.likes += 1
         self.save()

@@ -8,13 +8,22 @@ from .. import db, photos
 from flask_login import login_required, current_user
 import markdown2
 
+def sort_id(pitch):
+    # print("\n", pitch.id, "\n")
+    return pitch.id
+def add_likes(pitch_id):
+    pitch = Pitch.query.filter_by(id = pitch_id).first()
+    pitch.likes += 1
+    db.session.commit()    
+
 @main.route("/", methods = ["GET", "POST"])
-@login_required
 def index():
     """
     View function that returns root page
     """
-    pitches = reversed(Pitch.query.all())
+    pitches = Pitch.query.all()
+    pitches.sort(key=sort_id, reverse = True)
+
     form = NewPitchForm()
 
     if form.validate_on_submit():
@@ -28,3 +37,13 @@ def index():
         return redirect(url_for('main.index'))
 
     return render_template("index.html", new_pitch_form = form, pitches = pitches)
+
+@main.route("/likes", methods=['GET','POST'])
+def likes():
+    data = request.json["data"]
+
+    print("\nLikes", data, "\n")
+
+    add_likes(data[0])
+
+    return "oops"

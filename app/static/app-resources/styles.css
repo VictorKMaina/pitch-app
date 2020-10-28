@@ -31,12 +31,13 @@ html {
 .post {
     padding: 30px 25px;
 }
-.side-bar {
-}
 
 img {
     width: 80%;
 }
+/* .side-bar {
+    width: 225px;
+} */
 .side-bar .title {
     width: 100%;
     text-align: center;
@@ -73,6 +74,11 @@ img {
     width: 30px;
     height: 30px;
 }
+.likes, .dislikes {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
 .post-username {
     font-size: 2rem;
     font-weight: 600;
@@ -95,7 +101,7 @@ img {
 }
 .post-engagement {
     font-family: Montserrat, sans-serif;
-    color: #380943;
+    /* color: #380943; */
     font-weight: 500;
     font-size: 1.4rem;
 }
@@ -105,4 +111,8 @@ img {
 }
 .post-engagement hr {
     border-color: #C4C4C4;
+}
+.likes button {
+    background: none;
+    border: none;
 }

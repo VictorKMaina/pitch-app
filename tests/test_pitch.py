@@ -17,7 +17,7 @@ class TestPitchClass(unittest.TestCase):
 
         self.user.save()
 
-        self.pitch = Pitch(pitch = "Are you the wind? Because you're blowing me away.", likes = 0, dislikes = 0, user_id = self.user.id, time_posted = "2020-11-17 03:30", category = Category.pickup_lines)
+        self.pitch = Pitch(pitch = "Are you the wind? Because you're blowing me away.", likes = 0, dislikes = 3, user_id = self.user.id, time_posted = "2020-11-17 03:30", category = Category.pickup_lines)
 
 
     def tearDown(self):
@@ -37,7 +37,7 @@ class TestPitchClass(unittest.TestCase):
         self.assertIsNotNone(self.pitch.id)
         self.assertEqual(self.pitch.pitch,"Are you the wind? Because you're blowing me away.")
         self.assertEqual(self.pitch.likes, 0)
-        self.assertEqual(self.pitch.dislikes, 0)
+        self.assertEqual(self.pitch.dislikes, 3)
         self.assertEqual(self.pitch.time_posted, datetime.datetime(2020, 11, 17, 3, 30))
 
     def test_save(self):
@@ -76,11 +76,13 @@ class TestPitchClass(unittest.TestCase):
     
 
     
-    def test_add_likes(self):
+    def test_add_likes_dislikes(self):
         """
-        Test case to check if method adds like to database
+        Test case to check if method adds like and dislike to database
         """
         self.pitch.save()
         self.pitch.add_likes()
+        self.pitch.add_dislikes()
 
         self.assertEqual(self.pitch.likes, 1)
+        self.assertEqual(self.pitch.dislikes, 4)
