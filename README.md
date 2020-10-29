@@ -7,10 +7,10 @@ ___
 Pitcher is a social site where users can pitch ideas and others can rate them through likes. The pitches are divided into different categories. Anyone can view the pitches and vote on them, but one needs to have account to be able to add a pitch or leave a comment. When a user signs up, a welcome email is sent to the email address used to create their account.
 
 ## Technologies Used
-Pitcher is built on Flask, a Python microframework. The live app is deployed on Heroku, and Postgres is used to manae the database.
+Pitcher is built on Flask, a Python microframework. The live app is deployed on Heroku, and Postgres is used to manage the database.
 
 ## Installation (Ubuntu)
-You can run the app using a local server on your computer. You will need Git to clone the app from this repo. Since Pitcher uses Python 3 and Postresql, you will also need to install them both on your machine.
+You can run the app using a local server on your computer. You will need Git to clone the app from this repo. Since Pitcher also uses Python 3 and Postresql, you will need to install them on your machine.
 
 ```bash
 $ sudo apt install git python3 postgresql
