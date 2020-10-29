@@ -73,16 +73,3 @@ class TestPitchClass(unittest.TestCase):
         profile_pic_path = self.pitch.get_profile_pic()
 
         self.assertEqual(User.query.filter_by(id = self.user.id).first().profile_pic_path, profile_pic_path)
-    
-
-    
-    def test_add_likes_dislikes(self):
-        """
-        Test case to check if method adds like and dislike to database
-        """
-        self.pitch.save()
-        self.pitch.add_likes()
-        self.pitch.add_dislikes()
-
-        self.assertEqual(self.pitch.likes, 1)
-        self.assertEqual(self.pitch.dislikes, 4)

@@ -93,6 +93,18 @@ $ ./start.sh
 ```
 As long as the server is running, you can open it in the browser [using this link](http://127.0.0.1:5000).
 
+## Tests
+The app comes with some test modules. To run them, you will need to create another Postgresql database with the name `pitch_test`. Then edit `start.sh` to look like this
+
+```bash
+...
+export DATABASE_URL="postgresql+psycopg2://username:password@localhost/pitch_test"
+
+python3.6 manage.py test
+```
+
+Now run `./start.sh` on your terminal.
+
 ## Known bugs
 When viewing pitches in the categories pages, the app doesn't display profile pictures.
 
