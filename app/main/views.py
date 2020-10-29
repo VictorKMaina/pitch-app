@@ -17,6 +17,11 @@ def add_likes(pitch_id):
     pitch.likes += 1
     db.session.commit()
 
+def add_dislikes(pitch_id):
+    pitch = Pitch.query.filter_by(id = pitch_id).first()
+    pitch.dislikes += 1
+    db.session.commit()
+
 def add_comment(pitch_id, user_id, comment):
     pitch = Pitch.query.filter_by(id = pitch_id).first()
     time = datetime.datetime.now()
@@ -61,6 +66,15 @@ def likes():
 
     return redirect(request.referrer)
 
+@main.route("/dislikes", methods=['GET','POST'])
+def dislikes():
+    data = request.form["pitchId"]
+
+    print("\nDislikes ", data, "\n")
+    add_dislikes(data[0])
+
+    return redirect(request.referrer)
+
 @main.route("/comments", methods=['GET','POST'])
 def comments():
     data = request.form
@@ -74,13 +88,23 @@ def comments():
 @login_required
 @main.route("/account", methods=["GET", "POST"])
 def account():
+    pitches = Pitch.query.filter_by(user_id = current_user.id).all()
+    pitches.sort(key=sort_id, reverse = True)
+
     bio_form = UpdateBioForm()
     username = current_user.user_name
     profile = current_user.profile_pic_path
     bio = current_user.bio
 
-    return render_template("account.html", username = username, profile = profile, bio_form = bio_form, bio = bio)
+    if bio_form.validate_on_submit():
+        current_user.bio = bio_form.bio.data
 
+        db.session.commit()
+        return redirect(request.referrer)
+
+    return render_template("account.html", username = username, profile = profile, bio_form = bio_form, bio = bio, pitches = pitches)
+
+@login_required
 @main.route("/account/pic", methods=["POST"])
 def new_pic():
     user = User.query.filter_by(id = current_user.id).first()

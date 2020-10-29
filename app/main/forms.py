@@ -9,5 +9,5 @@ class NewPitchForm(FlaskForm):
     submit = SubmitField("Publish")
 
 class UpdateBioForm(FlaskForm):
-    bio = TextAreaField("Tell use about you.", validators = [Required()])
+    bio = TextAreaField("Tell us about you.", validators = [Required()])
     submit = SubmitField("Submit")

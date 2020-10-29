@@ -13,12 +13,12 @@
                 {{message}}
             </div>
             {% endfor %}
+            {{form.render_form(signin_form)}}
+            <p class="mt-4"> Don't have an account? <a href="{{url_for('auth.sign_in')}}">Sign up here</a></p>
         </div>
-
-        {{form.render_form(signin_form)}}
-        <p> Don't have an account? <a href="{{url_for('auth.sign_in')}}">Sign up here</a></p>
         <div class="col-md-2"></div>
     </div>
 </div>
+
 
 {% endblock %}

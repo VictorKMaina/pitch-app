@@ -1,25 +1,54 @@
 {% extends 'base.html' %}
 {% import 'bootstrap/form.html' as form %}
+{% import "macros.html" as macro with context %}
 
 {% block content %}
-    
-<div class="container d-flex justify-content-center">
-    <div style="font-size: 16px;">
-        <img src="{{ current_user.profile_pic_path }}" alt="profile-picture" class="img-responsive img-thumbnail">
 
-        <form action="{{url_for('main.new_pic')}}" method="post" enctype="multipart/form-data">
-            <input type="file" name="photo" class="form-control btn mt-3 p-0" required>
-            <button type="submit" class="btn btn-secondary mt-2">Submit</button>
-        </form>
-        
-        <h4 class="font-weight-bold text-black-50 mt-3">{{ current_user.user_name }}</h4>
-        <p>{{ current_user.bio }}</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <img src="{{ current_user.profile_pic_path }}" alt="profile-picture" class="img-thumbnail w-100 mb-4">
+            <form action="{{url_for('main.new_pic')}}" method="post" enctype="multipart/form-data">
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" name="photo" class="custom-file-input" id="inputGroupFile04"
+                            aria-describedby="inputGroupFileAddon04" required>
+                        <label class="custom-file-label" for="inputGroupFile04">Choose photo</label>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit"
+                            id="inputGroupFileAddon04">Submit</button>
+                    </div>
+                </div>
+            </form>
 
-        <div class="mt-5 text-center" style="width: 400px;">
-            {{ form.render_form(bio_form) }}
         </div>
-
+        <div class="col-md-5">
+            <div style="font-size: 16px;">
+                <h4 class="font-weight-bold text-black-50 mt-3">{{ current_user.user_name }}</h4>
+                <p>{{ current_user.bio }}</p>
+                <div class="mt-5">
+                    {{ form.render_form(bio_form) }}
+                </div>
+            </div>
+            <div class="container mt-5">
+                
+            </div>
+        </div>
+        <div class="col-md-1"></div>
     </div>
+    <div class="row mt-5">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <h2 class="text-black-50 font-weight-bold mb-4">Your Pitches</h2>
+            {{ macro.feedPost(pitches) }}
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+<div class="container d-flex justify-content-center">
 </div>
 
 {% endblock %}
