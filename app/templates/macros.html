@@ -1,61 +1,56 @@
+{% import "bootstrap/form.html" as form %}
 {% macro feedPost(pitches) %}
 {% for pitch in pitches %}
-<div class="post">
-    <div class="post-header d-flex justify-content-between">
+<div class="post" id="{{ pitch.id }}">
+    <div class="post-header d-flex justify-content-between mb-5">
         <div class="d-flex">
             <div class="profile-pic align-self-center"
-                style="background-image: url(/static/app-resources/pp.jpg); background-size: cover;"></div>
+                style="background: url('{{pitch.get_profile_pic()}}'); background-size: cover;"></div>
             <div class="ml-4 align-self-center">
-                <p class="post-username m-0">victormainak</p>
-                <p class="post-category m-0">Interview</p>
+                <p class="post-username m-0">{{pitch.get_username()}}</p>
+                <p class="post-category m-0">{{pitch.category}}</p>
             </div>
         </div>
         <div class="post-time align-self-center">
             {{pitch.time_posted }}
         </div>
     </div>
-    <hr class="w-100 my-5">
-    <div class="post-content">
+    <div class="post-content mb-5">
         {{ pitch.pitch }}
         <!-- <a href="#">Read More</a> -->
     </div>
-    <hr class="w-100 my-5">
-    <div class="post-engagement row justify-content-between">
-        <div class="col-6 d-flex align-items-center">
-            <script>
-
-                $(document).ready(function () {
-                    $(".likes").click(function(){
-                        $.ajax({
-                            type:"POST",
-                            url:"{{ url_for('main.index') }}",
-                            data:"1"
-                        }).done(function(data){
-                            $(".no-of-likes").html(data)
-                        })
-                    })
-                });
-
-            </script>
-
-            <div class="likes mr-4">
+    <!--  -->
+    <div class="post-engagement d-flex justify-content-between mb-5">
+        <div class="d-flex align-items-center mr-4">
+            <form action="{{url_for('main.likes')}}" method="post" class="likes mr-4">
                 <input value="{{pitch.id}}" name="pitchId" hidden>
-                {{ likeButton() }}
+                <button type="submit">{{ likeButton() }}</button>
                 <span class="ml-1" class="no-of-likes">{{ pitch.likes }}</span>
-            </div>
-            <div class="dislikes mr-4">
+            </form>
+            <form action="{{ url_for('main.likes') }}" method="post" class="dislikes mr-2">
+
                 {{ dislikeButton() }}
                 <span class="ml-1">{{pitch.dislikes}}</span>
-            </div>
+
+            </form>
         </div>
-        <div class="col-6 post-comment-field d-flex">
-            <div class="profile-pic d-inline-block align-self-center"
-                style="background: url(/static/app-resources/pp.jpg); background-size: cover;"></div>
-            <div class="input ml-3 flex-fill">
-                <p class="my-1">Write a comment...</p>
-                <hr class="m-0">
-            </div>
+        {% if current_user.is_authenticated %}
+        <div class="post-comment-field d-flex align-items-center">
+            <div class="profile-pic d-inline-block align-self-center" style="background: url('{{ current_user.profile_pic_path }}'); background-size: cover;"></div>
+            <form action="{{url_for('main.comments')}}" method="post" class=" flex-fill">
+                <input value="{{pitch.id}}" hidden name="pitchId">
+                <input value="{{current_user.id}}" hidden name="userId">
+                <div class="d-inline-block">
+                    <input type="text" placeholder="Write comment here..." class="ml-2" name="comment">
+                    <hr class="m-0 ml-2">
+                </div>
+                <button type="submit" class="btn btn-primary ml-2">Submit</button>
+            </form>
         </div>
+        {% endif %}
+    </div>
+    <div class="mt-5">
+        {{ comment(pitch) }}
     </div>
 </div>
 {% endfor %}
@@ -101,4 +96,16 @@
     </defs>
 </svg>
 
+{% endmacro %}
+
+{% macro comment(pitch) %}
+{% for comment in comments %}
+
+{% if comment.pitch_id == pitch.id %}
+<div class="comment">
+    <p class="font-weight-bold text-black-50 d-inline-block">{{ comment.get_username() }}</p>
+    <p class="d-inline-block ml-3">{{ comment.comment }}</p>
+</div>
+{% endif %}
+{% endfor %}
 {% endmacro %}

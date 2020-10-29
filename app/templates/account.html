@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/form.html' as form %}
+
+{% block content %}
+    
+<div class="container d-flex justify-content-center">
+    <div style="font-size: 16px;">
+        <img src="{{ current_user.profile_pic_path }}" alt="profile-picture" class="img-responsive img-thumbnail">
+
+        <form action="{{url_for('main.new_pic')}}" method="post" enctype="multipart/form-data">
+            <input type="file" name="photo" class="form-control btn mt-3 p-0" required>
+            <button type="submit" class="btn btn-secondary mt-2">Submit</button>
+        </form>
+        
+        <h4 class="font-weight-bold text-black-50 mt-3">{{ current_user.user_name }}</h4>
+        <p>{{ current_user.bio }}</p>
+
+        <div class="mt-5 text-center" style="width: 400px;">
+            {{ form.render_form(bio_form) }}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

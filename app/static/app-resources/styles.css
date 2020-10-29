@@ -3,7 +3,7 @@
 body,
 html {
     background: #F3F1F4;
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .container {
@@ -47,7 +47,7 @@ img {
     margin-bottom: 0px;
     border-radius: 10px 10px 0px 0px;
     font-family: "Montserrat", sans-serif;
-    font-size: 2.3rem;
+    font-size: 1.7rem;
     font-weight: 800;
 }
 .post-header {
@@ -60,7 +60,11 @@ img {
     padding-left: 50px;
     padding-right: 50px;
     font-weight: 500;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
+}
+.category-item a {
+    color: black;
+    text-transform: none;
 }
 .post-header .profile-pic {
     border-radius: 100%;
@@ -77,23 +81,25 @@ img {
 .likes, .dislikes {
     cursor: pointer;
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 .post-username {
-    font-size: 2rem;
+    font-size: 1.3rem;
     font-weight: 600;
 }
 .post-category {
     font-weight: 600;
-    font-size: 1.3rem;
+    font-size: 1rem;
     color: #BDBDBD;
 }
 .post-time {
+    font-size: 0.8em;
+    font-weight: 500;
     color: #858585;
 }
 .post-content {
     font-family: "Open Sans", sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
 }
 .post-content a, .post-content a:hover {
     color: #1A63BC;
@@ -103,7 +109,7 @@ img {
     font-family: Montserrat, sans-serif;
     /* color: #380943; */
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 1rem;
 }
 .post-comment-field .input {
     height: 30px;
@@ -115,4 +121,8 @@ img {
 .likes button {
     background: none;
     border: none;
+}
+input, input:active, input:focus {
+    border: 0;
+    outline: none;
 }

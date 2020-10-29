@@ -43,4 +43,3 @@ def sign_in():
         title = "New Account"
 
     return render_template("auth/sign_in.html", signup_form = form)
-

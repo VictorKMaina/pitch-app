@@ -6,6 +6,7 @@ class Config:
     General configuration class
     """
     SECRET_KEY = os.environ.get("SECRET_KEY")
+    UPLOADED_PHOTOS_DEST = 'app/static/profile_pics'
 
     # email configurations
     MAIL_SERVER = "smtp.gmail.com"

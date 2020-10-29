@@ -70,8 +70,6 @@ class Category:
     project = "Project"
     other = "Other"
 
-
-
 class Comment(db.Model):
     """
     Class for defining Comment instances
@@ -79,10 +77,6 @@ class Comment(db.Model):
     __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key = True)
     comment = db.Column(db.String, index = True)
-    likes = db.Column(db.Integer)
-    dislikes = db.Column(db.Integer)
-    time_posted = db.Column(db.DateTime())
-    category = db.Column(db.String())
     pitch_id = db.Column(db.Integer, db.ForeignKey("pitches.id"))
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 

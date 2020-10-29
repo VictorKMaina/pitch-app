@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% import "macros.html" as macro %}
+{% import "macros.html" as macro with context%}
 {% import "bootstrap/form.html" as form %}
 
 {% block content %}
@@ -7,22 +7,31 @@
 <div class="container p-0">
     <div class="row">
         <div class="col-lg-9 col-md-8">
+
             <div class="post" id="post_new_pitch">
+                {% if current_user.is_authenticated %}
                 {{ form.render_form(new_pitch_form) }}
+                {% else %}
+                    <a class="h4" href="{{url_for('auth.login')}}">Log in to comment and add pitches.</a>
+                {% endif %}
             </div>
+            {% if pitches == None %}
+                <p>No pitches posted.</p>
+            {% else %}
             {{ macro.feedPost(pitches) }}
+            {% endif %}
         </div>
         <div class="col-lg-3 col-md-4 d-flex justify-content-end">
             <div class="side-bar position-fixed">
                 <div class="h4 title text-white">Categories</div>
-                <div class="category-item">Sales</div>
-                <div class="category-item">Proposal</div>
-                <div class="category-item">Product</div>
-                <div class="category-item">Promotion</div>
-                <div class="category-item">Pickup Lines</div>
-                <div class="category-item">Interview</div>
-                <div class="category-item">Project</div>
-                <div class="category-item">Other</div>
+                <div class="category-item"><a href="{{url_for('main.categories',category='sales')}}">Sales</a></div>
+                <div class="category-item"><a href="{{url_for('main.categories',category='proposal')}}">Proposal</a></div>
+                <div class="category-item"><a href="{{url_for('main.categories',category='product')}}">Product</a></div>
+                <div class="category-item"><a href="{{url_for('main.categories',category='promotion')}}">Promotion</a></div>
+                <div class="category-item"><a href="{{url_for('main.categories',category='pickup lines')}}">Pickup Lines</a></div>
+                <div class="category-item"><a href="{{url_for('main.categories',category='interview')}}">Interview</a></div>
+                <div class="category-item"><a href="{{url_for('main.categories',category='project')}}">Project</a></div>
+                <div class="category-item"><a href="{{url_for('main.categories',category='other')}}">Other</a></div>
             </div>
         </div>
     </div>
