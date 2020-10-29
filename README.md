@@ -67,9 +67,10 @@ The app will also need to connect to the database you created. Add this `start.s
 export DATABASE_URL="postgresql+psycopg2://username:password@localhost/pitch"
 ```
 
-Pitcher uses SQLAlchemy to make managing the database directly from the app easier. To update your database to work with this app's models, run the following on your terminal.
+Pitcher uses SQLAlchemy to make managing the database directly from the app easier. To update your database to work with this app's models, run the following on your terminal. Replace `username` and `password` with your own.
 
 ```bash
+$ export DATABASE_URL="postgresql+psycopg2://username:password@localhost/pitch"
 $ python3.6 manage.py db upgrade
 ```
 
