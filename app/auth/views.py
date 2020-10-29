@@ -38,7 +38,7 @@ def sign_in():
 
         mail_message("Welcome to Pitcher", "email/welcome_user", user.email, user = user)
 
-        return redirect(url_for("auth.sign_in"))
+        return redirect(url_for("auth.login"))
 
         title = "New Account"
 
