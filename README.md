@@ -60,7 +60,7 @@ export MAIL_USERNAME="moringacoreprojects@gmail.com"
 export MAIL_PASSWORD="gwmsqndghwvumsgb"
 ```
 
-Pitcher will need a secret key fpr an imported module called WTForms. It will also need to connect to the database you created. Add these `start.sh`, and replace the `username` and `password` with your own.
+Pitcher will need a secret key for an imported module called WTForms. It will also need to connect to the database you created. Add these `start.sh`, and replace the `username` and `password` with your own.
 
 ```bash
 ...
