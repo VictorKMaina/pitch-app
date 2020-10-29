@@ -80,6 +80,7 @@ The configuration is almost complete. Edit `start.sh` so that it looks like this
 ```bash
 export MAIL_USERNAME="moringacoreprojects@gmail.com"
 export MAIL_PASSWORD="gwmsqndghwvumsgb"
+export SECRET_KEY="my-key"
 export DATABASE_URL="postgresql+psycopg2://username:password@localhost/pitch"
 
 python3.6 manage.py server
