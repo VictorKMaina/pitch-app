@@ -29,7 +29,7 @@ $ python3.6 -m venv virtual
 $ source virtual/bin/activate
 ```
 
-Note: Be sure to use your own preferred version of Python. You can confirm by running `$ python3 --version`.
+Note: Be sure to use your own preferred version of Python. You can confirm by running `$ python3 --version` on your terminal.
 
 Next, install the dependencies from the `requirements.txt` file.
 
@@ -43,6 +43,7 @@ Enter Postgresql on your terminal using `$ psql`, then do
 
 ```postgres
 username=# CREATE DATABASE pitch;
+username=# \q
 ```
 
 To be able to send emails to users, the app will access to an email address. For simplicity's sake, a dummy Google account and password have already been created. The app looks for exported environment variables to run. To enable this, create a file in the app's root directory called `start.sh`.
@@ -66,10 +67,10 @@ The app will also need to connect to the database you created. Add this `start.s
 export DATABASE_URL="postgresql+psycopg2://username:password@localhost/pitch"
 ```
 
-Pitcher uses SQLAlchemy to make managing the database directly from the app easier. To update your database to work with this app's models, run the following.
+Pitcher uses SQLAlchemy to make managing the database directly from the app easier. To update your database to work with this app's models, run the following on your terminal.
 
 ```bash
-python3.6 managa.py db upgrade
+$ python3.6 manage.py db upgrade
 ```
 
 The configuration is almost complete. Edit `start.sh` so that it looks like this.
@@ -90,6 +91,6 @@ $ ./start.sh
 As long as the server is running, you can open it in the browser [using this link](http://127.0.0.1:5000).
 
 ## Known bugs
-When viewing pitched in the categories, the app doesn't have profile pictures.
+When viewing pitches in the categories pages, the app doesn't display profile pictures.
 
 ## [LICENSE](/LICENSE)
