@@ -57,10 +57,9 @@ def likes():
     data = request.form["pitchId"]
 
     print("\nLikes ", data, "\n")
-
     add_likes(data[0])
 
-    return redirect(url_for("main.index"))
+    return redirect(request.referrer)
 
 @main.route("/comments", methods=['GET','POST'])
 def comments():
@@ -70,7 +69,7 @@ def comments():
 
     add_comment(data["pitchId"], data["userId"], data["comment"])
 
-    return redirect(url_for("main.index"))
+    return redirect(request.referrer)
 
 @login_required
 @main.route("/account", methods=["GET", "POST"])
@@ -96,8 +95,10 @@ def new_pic():
 
 @main.route("/category/<category>", methods=["GET", "POST"])
 def categories(category):
-    pitches = Pitch.query.all()
+    pitches = Pitch.query.filter_by(category = category).all()
     pitches.sort(key=sort_id, reverse = True)
+
+    print("\n Category: ", category, "\n")
 
     if pitches == []:
         pitches = None

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% import "macros.html" as macro with context%}
+
+{% block content %}
+<div class="row">
+    <div class="container">
+        <div class="col-lg-9 col-md-8">
+            <div class="post" id="post_new_pitch">
+                <a class="h5" href="{{url_for('main.index')}}">Add a new pitch.</a>
+            </div>
+            {% if pitches == None %}
+            <p>No pitches posted.</p>
+            {% else %}
+            {{ macro.feedPost(pitches) }}
+            {% endif %}
+        </div>
+        <div class="col-lg-9 col-md-4"></div>
+    </div>
+</div>
+{% endblock %}
